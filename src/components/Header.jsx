@@ -12,7 +12,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-emerald-600 to-blue-600 shadow-lg border-b border-emerald-300">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg border-b border-blue-300">
       <div className="w-full px-3 sm:px-4 lg:px-6">
         <div className="flex justify-between h-14">
           <div className="flex items-center">
@@ -31,11 +31,11 @@ const Header = () => {
               <div className="flex flex-col">
                 <div className="flex items-center space-x-1">
                   <h1 className="text-xl font-black text-white tracking-tight">LeapFrog</h1>
-                  <span className="px-2 py-0.5 bg-yellow-400 text-emerald-800 text-xs font-bold rounded-full uppercase tracking-wide shadow-sm animate-pulse-glow">
+                  <span className="px-2 py-0.5 bg-yellow-400 text-blue-800 text-xs font-bold rounded-full uppercase tracking-wide shadow-sm animate-pulse-glow">
                     AI
                   </span>
                 </div>
-                <span className="text-xs text-emerald-100 font-medium hidden sm:block -mt-0.5">
+                <span className="text-xs text-blue-100 font-medium hidden sm:block -mt-0.5">
                   {userType === 'patient' ? '🏥 Patient Portal' : '👩‍⚕️ Doctor Portal'}
                 </span>
               </div>
@@ -66,7 +66,7 @@ const Header = () => {
                 />
                 <div className="hidden md:block">
                   <span className="text-sm font-semibold text-white group-hover:text-yellow-100">{user?.name}</span>
-                  <p className="text-xs text-emerald-100 capitalize font-medium">{userType}</p>
+                  <p className="text-xs text-blue-100 capitalize font-medium">{userType}</p>
                 </div>
               </a>
               

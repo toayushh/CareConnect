@@ -23,25 +23,25 @@ const Footer = ({ onSignIn }) => {
   };
 
   return (
-    <footer className="mt-20 bg-gradient-to-b from-white to-slate-50 border-t border-slate-200/80">
+    <footer className="mt-20 bg-gradient-to-b from-blue-900 to-blue-800 border-t border-blue-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid gap-10 md:gap-8 md:grid-cols-4">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2">
               <span className="text-3xl">🐸</span>
-              <span className="text-xl font-extrabold text-blue-700">LeapFrog Health</span>
+              <span className="text-xl font-extrabold text-white">LeapFrog Health</span>
             </div>
-            <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+            <p className="mt-3 text-sm text-blue-200 leading-relaxed">
               Safer care through transparency and the Leapfrog methodology.
             </p>
-            <div className="mt-5 space-y-1 text-sm text-slate-700">
+            <div className="mt-5 space-y-1 text-sm text-blue-200">
               <p>123 Clinical Way, Safe City</p>
               <p>
-                <a href="tel:+11234567890" className="hover:text-blue-700">(+1) 123‑456‑7890</a>
+                <a href="tel:+11234567890" className="hover:text-white">(+1) 123‑456‑7890</a>
               </p>
               <p>
-                <a href="mailto:care@leapfrog.health" className="hover:text-blue-700">care@leapfrog.health</a>
+                <a href="mailto:care@leapfrog.health" className="hover:text-white">care@leapfrog.health</a>
               </p>
             </div>
             <div className="mt-6 flex items-center gap-3">
@@ -59,8 +59,8 @@ const Footer = ({ onSignIn }) => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-slate-900">Quick Links</h4>
-            <ul className="mt-4 space-y-2 text-sm text-slate-700">
+            <h4 className="font-semibold text-white">Quick Links</h4>
+            <ul className="mt-4 space-y-2 text-sm text-blue-200">
               {[
                 { label: 'About', href: '#about' },
                 { label: 'Leapfrog Methodology', href: '#leapfrog' },
@@ -69,7 +69,7 @@ const Footer = ({ onSignIn }) => {
                 { label: 'Contact', href: '#contact' },
               ].map((l) => (
                 <li key={l.label}>
-                  <a className="hover:text-blue-700" href={l.href}>{l.label}</a>
+                  <a className="hover:text-white" href={l.href}>{l.label}</a>
                 </li>
               ))}
             </ul>
@@ -77,8 +77,8 @@ const Footer = ({ onSignIn }) => {
 
           {/* Portals */}
           <div>
-            <h4 className="font-semibold text-slate-900">Portals</h4>
-            <p className="mt-4 text-sm text-slate-700">Secure access for patients and clinicians.</p>
+            <h4 className="font-semibold text-white">Portals</h4>
+            <p className="mt-4 text-sm text-blue-200">Secure access for patients and clinicians.</p>
             <div className="mt-5 space-y-3">
               <button onClick={onSignIn} className="w-full text-left px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 shadow-sm">Patient Sign in</button>
               <button onClick={onSignIn} className="w-full text-left px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm">Doctor Sign in</button>
@@ -87,8 +87,8 @@ const Footer = ({ onSignIn }) => {
 
           {/* Newsletter */}
           <div>
-            <h4 className="font-semibold text-slate-900">Stay in the loop</h4>
-            <p className="mt-4 text-sm text-slate-700">Get quality and safety updates from LeapFrog Health.</p>
+            <h4 className="font-semibold text-white">Stay in the loop</h4>
+            <p className="mt-4 text-sm text-blue-200">Get quality and safety updates from LeapFrog Health.</p>
             {subscribed ? (
               <div className="mt-5 rounded-lg bg-green-50 text-green-700 text-sm p-3 ring-1 ring-green-200">Thanks! You are subscribed.</div>
             ) : (
@@ -104,18 +104,18 @@ const Footer = ({ onSignIn }) => {
                 <button type="submit" className="rounded-lg bg-blue-600 text-white px-4 py-2 hover:bg-blue-700">Subscribe</button>
               </form>
             )}
-            <p className="mt-2 text-xs text-slate-500">We respect your privacy. Unsubscribe anytime.</p>
+            <p className="mt-2 text-xs text-blue-300">We respect your privacy. Unsubscribe anytime.</p>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm text-slate-600 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="border-t border-blue-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-sm text-blue-200 flex flex-col md:flex-row items-center justify-between gap-3">
           <p>© {new Date().getFullYear()} LeapFrog Health</p>
           <div className="flex items-center gap-4 text-xs">
-            <a href="#" className="hover:text-blue-700">Privacy</a>
-            <a href="#" className="hover:text-blue-700">Terms</a>
-            <a href="#" className="hover:text-blue-700">Accessibility</a>
+            <a href="#" className="hover:text-white">Privacy</a>
+            <a href="#" className="hover:text-white">Terms</a>
+            <a href="#" className="hover:text-white">Accessibility</a>
           </div>
         </div>
       </div>

@@ -80,18 +80,18 @@ const Sidebar = ({ activeItem, onNavigate }) => {
   };
 
   const SidebarContent = () => (
-    <div className="p-3">
-      <div className="mb-4 pb-3 border-b border-gray-100">
+    <div className="p-4 bg-gradient-to-b from-blue-50 to-white h-full">
+      <div className="mb-4 pb-3 border-b border-blue-200">
         <div className="flex items-center space-x-2 mb-1">
-          <div className="w-6 h-6 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full flex items-center justify-center">
+          <div className="w-7 h-7 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md">
             <span className="text-sm">🐸</span>
           </div>
-          <h2 className="text-sm font-bold text-gray-900">LeapFrog</h2>
-          <span className="px-1.5 py-0.5 bg-yellow-400 text-emerald-800 text-xs font-bold rounded-full uppercase tracking-wide">
+          <h2 className="text-sm font-bold text-blue-900">LeapFrog</h2>
+          <span className="px-1.5 py-0.5 bg-yellow-400 text-blue-800 text-xs font-bold rounded-full uppercase tracking-wide shadow-sm">
             AI
           </span>
         </div>
-        <p className="text-xs text-gray-500 ml-8">Patient Portal</p>
+        <p className="text-xs text-blue-600 ml-9 font-medium">Patient Portal</p>
       </div>
       
       <nav className="space-y-1">
@@ -130,10 +130,10 @@ const Sidebar = ({ activeItem, onNavigate }) => {
                       <button
                         key={item.id}
                         onClick={() => handleItemClick(item.id)}
-                        className={`w-full text-left flex items-center px-2 py-1.5 text-sm rounded-md transition-all ${
+                        className={`w-full text-left flex items-center px-3 py-2 text-sm rounded-lg transition-all ${
                           isActive
-                            ? 'bg-indigo-100 text-indigo-700 border-l-2 border-indigo-600'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                            ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md transform scale-105'
+                            : 'text-blue-700 hover:bg-blue-100 hover:text-blue-900 bg-white/50'
                         }`}
                       >
                         <span className="mr-2">{item.icon}</span>
@@ -182,7 +182,7 @@ const Sidebar = ({ activeItem, onNavigate }) => {
       </div>
 
       {/* Desktop sidebar */}
-      <aside className="w-56 bg-white border-r border-gray-200 hidden md:block fixed left-0 top-14 bottom-0 z-40">
+      <aside className="w-56 bg-gradient-to-b from-blue-50 to-white border-r border-blue-200 hidden md:block fixed left-0 top-14 bottom-0 z-40 shadow-lg">
         <SidebarContent />
       </aside>
     </>

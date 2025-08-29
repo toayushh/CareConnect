@@ -62,7 +62,7 @@ const PatientDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <Sidebar activeItem={active} onNavigate={handleNavigation} />
       <div className="md:ml-56">
         <main className="pt-14">
@@ -104,13 +104,13 @@ const PatientDashboard = () => {
           )}
 
           {active === 'patient-search' && (
-            <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
+            <section className="animate-fade-in">
               <DoctorSearch />
             </section>
           )}
 
           {active === 'patient-appointments' && (
-            <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
+            <section className="animate-fade-in">
               <AppointmentsList />
             </section>
           )}
@@ -133,8 +133,14 @@ const PatientDashboard = () => {
             </section>
           )}
 
+          {active === 'patient-progress' && (
+            <section className="animate-fade-in">
+              <ProgressTracking />
+            </section>
+          )}
+
           {active === 'patient-profile' && (
-            <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
+            <section className="animate-fade-in">
               <PatientProfile />
             </section>
           )}
@@ -146,7 +152,7 @@ const PatientDashboard = () => {
           )}
 
           {active === 'patient-feedback' && (
-            <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
+            <section className="animate-fade-in">
               <FeedbackPanel />
             </section>
           )}
@@ -156,17 +162,11 @@ const PatientDashboard = () => {
               <PartnersPanel />
             </section>
           )}
-
-          {active === 'patient-progress' && (
-            <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
-              <ProgressTracking />
-            </section>
-          )}
         </main>
       </div>
       
       {/* Floating Chatbot Widget */}
-      {active !== 'patient-chatbot' && <ChatbotWidget />}
+      <ChatbotWidget />
     </div>
   );
 };

@@ -38,9 +38,60 @@ const TreatmentPlanManager = () => {
       if (res.ok) {
         const data = await res.json();
         setPlans(data);
+      } else {
+        // Fallback demo data
+        setPlans([
+          {
+            id: 1,
+            patientId: 'demo-patient-1',
+            patientName: 'Sarah Johnson',
+            title: 'Diabetes Management Plan',
+            description: 'Comprehensive diabetes care including medication, diet, and exercise',
+            status: 'active',
+            priority: 'high',
+            startDate: '2024-01-15',
+            endDate: '2024-12-15',
+            medications: ['Metformin 500mg', 'Insulin Glargine'],
+            therapies: ['Nutritional Counseling', 'Exercise Therapy'],
+            goals: ['HbA1c < 7%', 'Weight loss 10lbs', 'Blood glucose monitoring'],
+            progress: 75,
+            lastUpdated: '2024-08-25',
+            collaborators: ['Dr. Smith', 'Nurse Maria', 'Dietitian Jones']
+          },
+          {
+            id: 2,
+            patientId: 'demo-patient-2',
+            patientName: 'Robert Chen',
+            title: 'Hypertension Control',
+            description: 'Blood pressure management with lifestyle modifications',
+            status: 'active',
+            priority: 'medium',
+            startDate: '2024-02-01',
+            endDate: '2024-11-01',
+            medications: ['Lisinopril 10mg', 'Amlodipine 5mg'],
+            therapies: ['Cardiac Rehabilitation', 'Stress Management'],
+            goals: ['BP < 130/80', 'Daily exercise 30min', 'Low sodium diet'],
+            progress: 60,
+            lastUpdated: '2024-08-20',
+            collaborators: ['Dr. Johnson', 'Cardio Specialist']
+          }
+        ]);
       }
     } catch (error) {
       console.error('Error loading treatment plans:', error);
+      // Fallback demo data on error
+      setPlans([
+        {
+          id: 1,
+          patientName: 'Demo Patient',
+          title: 'Sample Treatment Plan',
+          description: 'Demo plan for system testing',
+          status: 'active',
+          priority: 'medium',
+          progress: 50,
+          lastUpdated: new Date().toISOString().split('T')[0]
+        }
+      ]);
     } finally {
       setLoading(false);
     }
@@ -52,9 +103,22 @@ const TreatmentPlanManager = () => {
       if (res.ok) {
         const data = await res.json();
         setPatients(data);
+      } else {
+        // Fallback demo patients
+        setPatients([
+          { id: 'demo-patient-1', name: 'Sarah Johnson', age: 45, condition: 'Diabetes Type 2' },
+          { id: 'demo-patient-2', name: 'Robert Chen', age: 62, condition: 'Hypertension' },
+          { id: 'demo-patient-3', name: 'Emily Davis', age: 34, condition: 'Asthma' },
+          { id: 'demo-patient-4', name: 'Michael Brown', age: 58, condition: 'Arthritis' }
+        ]);
       }
     } catch (error) {
       console.error('Error loading patients:', error);
+      // Fallback demo patients on error
+      setPatients([
+        { id: 'demo-patient-1', name: 'Demo Patient 1', age: 45, condition: 'General Care' },
+        { id: 'demo-patient-2', name: 'Demo Patient 2', age: 35, condition: 'Routine Checkup' }
+      ]);
     }
   };
 

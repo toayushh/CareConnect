@@ -10,6 +10,8 @@ import TreatmentPlanManager from './TreatmentPlanManager';
 import MessageCenter from './MessageCenter';
 import WorkshopsPanel from '../Workshops/WorkshopsPanel';
 import FeedbackPanel from '../Feedback/FeedbackPanel';
+import ConsentsPanel from '../Consents/ConsentsPanel';
+import PartnersPanel from '../Partners/PartnersPanel';
 
 const DoctorDashboard = () => {
   const nav = [
@@ -23,6 +25,8 @@ const DoctorDashboard = () => {
     { id: 'doc-profile', label: 'Profile', icon: '👤' },
     { id: 'doc-workshops', label: 'Workshops', icon: '🧑‍🏫' },
     { id: 'doc-feedback', label: 'Feedback', icon: '🔄' },
+    { id: 'doc-consents', label: 'Consents', icon: '📝' },
+    { id: 'doc-partners', label: 'Partners', icon: '🤝' },
   ];
 
   const getInitial = () => {
@@ -46,7 +50,7 @@ const DoctorDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <DoctorSidebar activeItem={active} onNavigate={handleNavigation} />
       <div className="md:ml-56">
         <main className="pt-14">
@@ -83,6 +87,18 @@ const DoctorDashboard = () => {
           {active === 'doc-feedback' && (
             <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
               <FeedbackPanel />
+            </section>
+          )}
+
+          {active === 'doc-consents' && (
+            <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
+              <ConsentsPanel />
+            </section>
+          )}
+
+          {active === 'doc-partners' && (
+            <section className="bg-white rounded-lg shadow-sm p-3 sm:p-4 animate-fade-in">
+              <PartnersPanel />
             </section>
           )}
 

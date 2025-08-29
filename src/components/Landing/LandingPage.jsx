@@ -22,9 +22,9 @@ const Badge = ({ title, description }) => (
 
 const LandingPage = ({ onSignIn }) => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Nav */}
-      <nav className="sticky top-0 z-40 bg-gradient-to-r from-emerald-600 to-blue-600 shadow-lg border-b border-emerald-300">
+      <nav className="sticky top-0 z-40 bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg border-b border-blue-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center space-x-3 group">
             {/* Enhanced Frog Logo */}
@@ -41,11 +41,11 @@ const LandingPage = ({ onSignIn }) => {
             <div className="flex flex-col">
               <div className="flex items-center space-x-1">
                 <h1 className="text-xl font-black text-white tracking-tight">LeapFrog</h1>
-                <span className="px-2 py-0.5 bg-yellow-400 text-emerald-800 text-xs font-bold rounded-full uppercase tracking-wide shadow-sm animate-pulse-glow">
+                <span className="px-2 py-0.5 bg-yellow-400 text-blue-800 text-xs font-bold rounded-full uppercase tracking-wide shadow-sm animate-pulse-glow">
                   AI
                 </span>
               </div>
-              <span className="text-xs text-emerald-100 font-medium hidden sm:block -mt-0.5">
+              <span className="text-xs text-blue-100 font-medium hidden sm:block -mt-0.5">
                 🏥 Healthcare Platform
               </span>
             </div>
@@ -67,172 +67,280 @@ const LandingPage = ({ onSignIn }) => {
           </div>
         </div>
       </nav>
-
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10 bg-cover bg-center"
-          style={{ backgroundImage: "url('/assets/images/hero.svg')" }}
-        />
-        <div className="bg-gradient-to-b from-white/60 via-white/70 to-white pt-20 pb-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900">
-                Safer, Smarter Care with the Leapfrog Methodology
-              </h1>
-              <p className="mt-4 text-lg text-gray-700 leading-relaxed">
-                We measure, report, and improve on what matters: patient safety,
-                evidence‑based care, and transparent outcomes. Our hospital is
-                aligned to Leapfrog standards so every decision advances quality.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <button
-                  onClick={onSignIn}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md"
-                >
-                  Book or Sign in
-                </button>
-                <a href="#leapfrog" className="px-6 py-3 rounded-lg border border-gray-300 text-gray-800 hover:bg-gray-50">
-                  Explore our standards
-                </a>
-              </div>
-              <div className="mt-10 grid grid-cols-3 gap-6">
-                <Stat value="A" label="Hospital Safety Grade" />
-                <Stat value="99%" label="Medication scanning compliance" />
-                <Stat value="24/7" label="ICU intensivist coverage" />
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden ring-1 ring-gray-200 shadow-lg aspect-video bg-black">
-              <video
-                className="w-full h-full object-cover"
-                src="/asset/vid1.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                controls
-                poster="/assets/images/hero.svg"
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
+        {/* Hero */}
+  <section className="relative overflow-hidden bg-gradient-to-br from-blue-100 via-blue-50 to-white">
+    {/* Background Video */}
+    <div className="absolute inset-0 z-0">
+      <video 
+        autoPlay 
+        muted 
+        loop 
+        className="w-full h-full object-cover opacity-90"
+        poster="/assets/images/hero.svg"
+      >
+        <source src="/assets/videos/video2.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-100/80 to-white/90"></div>
+    </div>
+    
+    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="text-left">
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-800 text-sm font-semibold mb-6">
+            🚀 AI-Powered Healthcare Platform
           </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-          <img
-            src="/asset/img.png"
-            alt="Modern patient-centered hospital"
-            className="rounded-2xl shadow-md ring-1 ring-gray-100 object-cover w-full h-full"
-            onError={(e) => {
-              if (e.currentTarget.src.endsWith('img.png')) {
-                e.currentTarget.src = '/assets/images/hero.svg';
-              }
-            }}
-          />
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900">Patient‑Centered, Data‑Driven</h2>
-            <p className="mt-4 text-gray-700 leading-relaxed">
-              From digital triage to bedside, our teams use standardized checklists,
-              closed‑loop communication, and real‑time surveillance to reduce harm
-              and improve outcomes.
-            </p>
-            <ul className="mt-6 grid sm:grid-cols-2 gap-3 text-gray-700">
-              <li className="flex items-start gap-2"><span>🧪</span> Computerized provider order entry (CPOE) with decision support</li>
-              <li className="flex items-start gap-2"><span>🩺</span> ICU care led by board‑certified intensivists</li>
-              <li className="flex items-start gap-2"><span>💊</span> Bar‑code medication administration (BCMA)</li>
-              <li className="flex items-start gap-2"><span>👶</span> Evidence‑based maternity care measures tracked and published</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Leapfrog methodology */}
-      <section id="leapfrog" className="py-20 bg-gradient-to-b from-blue-50 to-indigo-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold text-gray-900 text-center">How We Operationalize the Leapfrog Methodology</h3>
-          <p className="mt-3 text-center text-gray-700 max-w-3xl mx-auto">
-            We publicly report on nationally standardized measures and hard‑wire them into
-            daily practice. Here are a few pillars we track continuously.
+          <h1 className="text-5xl lg:text-6xl font-extrabold text-blue-900 leading-tight">
+            Welcome to 
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800"> LeapFrog</span>
+            <span className="block text-4xl lg:text-5xl mt-2">Health Platform</span>
+          </h1>
+          <p className="mt-6 text-xl text-blue-700 leading-relaxed">
+            Revolutionary AI-driven healthcare insights and predictive analytics for personalized patient care. 
+            Experience the future of medical data analysis.
           </p>
-          <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Badge title="CPOE & Test Results Safety" description="All medication and diagnostic orders are placed electronically with clinical decision support to prevent contraindications and dosage errors." />
-            <Badge title="ICU Physician Staffing" description="Intensivists provide 24/7 coverage with rapid‑response escalation pathways reducing mortality and complications." />
-            <Badge title="BCMA & Pharmacy Verification" description="100% bedside bar‑code scanning with pharmacist verification for high‑alert medications." />
-            <Badge title="Maternity Care" description="Lower NTSV cesarean rates, safe episiotomy practice, and respectful maternity care tracked per Leapfrog measures." />
-            <Badge title="Infections & Falls" description="CLABSI, CAUTI, C. diff and fall rates monitored via real‑time dashboards with unit‑level ownership." />
-            <Badge title="Transparency" description="Outcomes are shared with patients and staff; we close the loop on every safety event in under 72 hours." />
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section id="services" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold text-gray-900 text-center">Comprehensive Services</h3>
-          <div className="mt-10 grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: '🏥',
-                title: 'Emergency & Acute Care',
-                text: 'Door‑to‑diagnosis in minutes with protocolized stroke, STEMI and sepsis pathways.',
-              },
-              { icon: '🫀', title: 'Cardiac & Imaging', text: 'Low‑dose imaging, cath lab excellence, and post‑procedure safety huddles.' },
-              { icon: '🧠', title: 'Neuro & Rehab', text: 'Early mobility programs and goal‑directed neuro‑rehab.' },
-            ].map((s) => (
-              <div key={s.title} className="p-6 rounded-xl ring-1 ring-gray-100 shadow-sm bg-white">
-                <div className="text-4xl">{s.icon}</div>
-                <h4 className="mt-4 font-semibold text-gray-900">{s.title}</h4>
-                <p className="mt-2 text-sm text-gray-700 leading-relaxed">{s.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Outcomes */}
-      <section id="outcomes" className="py-20 bg-gradient-to-b from-indigo-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-          <div className="rounded-2xl overflow-hidden ring-1 ring-gray-200 shadow-lg aspect-video bg-black">
-            <video
-              className="w-full h-full object-cover"
-              src="/asset/vid2.mp4"
-              controls
-              playsInline
-              poster="/assets/images/hero.svg"
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={onSignIn}
+              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-lg font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-gray-900">Measured Results</h3>
-            <ul className="mt-6 space-y-3 text-gray-700">
-              <li>• 35% reduction in serious safety events YoY</li>
-              <li>• 28% lower readmissions compared to regional average</li>
-              <li>• Top quartile patient‑reported experience scores</li>
-            </ul>
-            <button onClick={onSignIn} className="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md">
-              Get started — Sign in
+              🏥 Start Your Journey
             </button>
+            <a
+              href="#features"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 text-lg font-semibold rounded-xl border-2 border-blue-200 hover:bg-blue-50 transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              📊 Explore Features
+            </a>
+          </div>
+          
+          {/* Stats */}
+          <div className="mt-12 grid grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-900">50K+</div>
+              <div className="text-sm text-blue-600 font-medium">Patients Served</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-900">98%</div>
+              <div className="text-sm text-blue-600 font-medium">Accuracy Rate</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-900">24/7</div>
+              <div className="text-sm text-blue-600 font-medium">AI Monitoring</div>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Contact / CTA */}
-      <section id="contact" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl font-bold text-gray-900">Your safety comes first.</h3>
-          <p className="mt-2 text-gray-700">Log in to book appointments, view records, and message your care team.</p>
-          <button onClick={onSignIn} className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md">
-            Sign in now
-          </button>
+        
+        <div className="relative">
+          <img 
+            src="/assets/images/img.png" 
+            alt="Healthcare Dashboard Preview" 
+            className="w-full h-auto rounded-2xl shadow-2xl border-4 border-white"
+          />
+          <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-xl">
+            <span className="text-4xl">🤖</span>
+          </div>
         </div>
-      </section>
-
-      <Footer onSignIn={onSignIn} />
+      </div>
+    </div>
+  </section>
+        {/* Features */}
+  <section id="features" className="py-20 bg-gradient-to-b from-white to-blue-50">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-800 text-sm font-semibold mb-4">
+          ✨ Platform Features
+        </div>
+        <h2 className="text-4xl font-extrabold text-blue-900 mb-4">
+          Revolutionizing Healthcare with AI
+        </h2>
+        <p className="text-xl text-blue-700 max-w-3xl mx-auto">
+          Discover how our advanced AI technology transforms patient care and medical decision-making
+        </p>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span className="text-2xl">🧠</span>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-3">AI-Driven Insights</h3>
+          <p className="text-blue-700 leading-relaxed">
+            Leverage cutting-edge artificial intelligence to gain deep insights into patient health patterns, 
+            treatment outcomes, and predictive health indicators.
+          </p>
+          <div className="mt-4 inline-flex items-center text-blue-600 font-semibold text-sm">
+            Learn More →
+          </div>
+        </div>
+        
+        <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span className="text-2xl">📊</span>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-3">Predictive Analytics</h3>
+          <p className="text-blue-700 leading-relaxed">
+            Predict patient outcomes and optimize treatment plans with advanced machine learning models 
+            that analyze vast amounts of medical data.
+          </p>
+          <div className="mt-4 inline-flex items-center text-blue-600 font-semibold text-sm">
+            Learn More →
+          </div>
+        </div>
+        
+        <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span className="text-2xl">🎯</span>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-3">Personalized Care</h3>
+          <p className="text-blue-700 leading-relaxed">
+            Deliver personalized healthcare experiences tailored to individual patient needs, 
+            preferences, and medical history for optimal outcomes.
+          </p>
+          <div className="mt-4 inline-flex items-center text-blue-600 font-semibold text-sm">
+            Learn More →
+          </div>
+        </div>
+        
+        <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span className="text-2xl">⚡</span>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-3">Real-time Monitoring</h3>
+          <p className="text-blue-700 leading-relaxed">
+            Monitor patient vitals and health metrics in real-time with intelligent alerts 
+            and automated risk assessment protocols.
+          </p>
+          <div className="mt-4 inline-flex items-center text-blue-600 font-semibold text-sm">
+            Learn More →
+          </div>
+        </div>
+        
+        <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span className="text-2xl">🔒</span>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-3">Secure & Compliant</h3>
+          <p className="text-blue-700 leading-relaxed">
+            HIPAA-compliant platform with enterprise-grade security measures, 
+            ensuring complete privacy and protection of sensitive medical data.
+          </p>
+          <div className="mt-4 inline-flex items-center text-blue-600 font-semibold text-sm">
+            Learn More →
+          </div>
+        </div>
+        
+        <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span className="text-2xl">🌐</span>
+          </div>
+          <h3 className="text-xl font-bold text-blue-900 mb-3">Cloud Integration</h3>
+          <p className="text-blue-700 leading-relaxed">
+            Seamlessly integrate with existing healthcare systems and cloud infrastructure 
+            for scalable, efficient data management and analysis.
+          </p>
+          <div className="mt-4 inline-flex items-center text-blue-600 font-semibold text-sm">
+            Learn More →
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {/* About Section with Image */}
+  <section id="about" className="py-20 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-800 text-sm font-semibold mb-6">
+            🏥 About LeapFrog
+          </div>
+          <h2 className="text-4xl font-extrabold text-blue-900 mb-6">
+            Transforming Healthcare Through Innovation
+          </h2>
+          <p className="text-lg text-blue-700 mb-6 leading-relaxed">
+            LeapFrog Health represents the next generation of healthcare technology, combining 
+            artificial intelligence, machine learning, and predictive analytics to revolutionize 
+            patient care and medical decision-making.
+          </p>
+          <p className="text-lg text-blue-700 mb-8 leading-relaxed">
+            Our platform empowers healthcare professionals with intelligent insights, 
+            enables personalized treatment plans, and improves patient outcomes through 
+            data-driven medicine.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={onSignIn}
+              className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg"
+            >
+              Get Started Today
+            </button>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-700 font-semibold rounded-xl border-2 border-blue-200 hover:bg-blue-50 transition-all duration-300"
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
+        <div className="relative">
+          <img 
+            src="/assets/images/img2.png" 
+            alt="Healthcare Innovation" 
+            className="w-full h-auto rounded-2xl shadow-2xl"
+          />
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-blue-900/20 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {/* Outcomes Video Section */}
+  <section id="outcomes" className="py-20 bg-gradient-to-b from-blue-50 to-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-800 text-sm font-semibold mb-6">
+          📈 Proven Outcomes
+        </div>
+        <h2 className="text-4xl font-extrabold text-blue-900 mb-4">
+          See Our Impact in Action
+        </h2>
+        <p className="text-xl text-blue-700 max-w-3xl mx-auto">
+          Watch how LeapFrog Health is transforming patient care and improving medical outcomes
+        </p>
+      </div>
+      
+      <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-blue-900">
+        <video 
+          controls 
+          className="w-full h-auto"
+          poster="/assets/images/hero.svg"
+        >
+          <source src="/assets/videos/video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+          <div className="text-3xl font-bold text-blue-900 mb-2">250%</div>
+          <div className="text-sm text-blue-600 font-medium">Faster Diagnosis</div>
+        </div>
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+          <div className="text-3xl font-bold text-blue-900 mb-2">95%</div>
+          <div className="text-sm text-blue-600 font-medium">Patient Satisfaction</div>
+        </div>
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+          <div className="text-3xl font-bold text-blue-900 mb-2">40%</div>
+          <div className="text-sm text-blue-600 font-medium">Cost Reduction</div>
+        </div>
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+          <div className="text-3xl font-bold text-blue-900 mb-2">99.9%</div>
+          <div className="text-sm text-blue-600 font-medium">Uptime Reliability</div>
+        </div>
+      </div>
+    </div>
+  </section>
+      <Footer />
     </div>
   );
 };

@@ -181,10 +181,29 @@ const AdvancedPatientProgress = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading patient progress data...</p>
+      <div className="bg-gradient-to-br from-blue-50 to-white min-h-screen p-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white rounded-xl shadow-lg border border-blue-100 p-8">
+            <div className="flex items-center justify-center h-64">
+              <div className="text-center">
+                <div className="relative">
+                  <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mx-auto mb-6"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-2xl">🏥</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-blue-900 mb-2">Loading Patient Progress</h3>
+                <p className="text-blue-600">Analyzing patient data and generating insights...</p>
+                <div className="mt-4 flex justify-center">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.1s'}}></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
