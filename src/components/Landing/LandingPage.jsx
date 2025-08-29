@@ -309,31 +309,173 @@ const LandingPage = ({ onSignIn }) => {
         </p>
       </div>
       
-      <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-blue-900">
-        <video 
-          controls 
-          className="w-full h-auto"
-          poster="/assets/images/hero.svg"
-        >
-          <source src="/assets/videos/video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        {/* Video Container - Left Side */}
+        <div className="order-2 lg:order-1">
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-blue-900 max-w-xl mx-auto lg:mx-0" style={{minHeight: '255px'}}>
+            <video 
+              controls 
+              className="w-full h-full object-cover"
+              poster="/assets/images/hero.svg"
+            >
+              <source src="/assets/videos/video.mp4" type="video/mp4" />
+              Your browser is not supported.
+            </video>
+            <div className="absolute top-4 right-4 bg-blue-800 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              🎬 Watch Demo
+            </div>
+          </div>
+          
+          {/* Additional Content Below Video */}
+          <div className="mt-6 space-y-4">
+            <div className="bg-white p-4 rounded-xl shadow-lg border border-blue-100">
+              <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center">
+                <span className="mr-2">📱</span>
+                Mobile Optimized
+              </h4>
+              <p className="text-blue-700 text-sm">
+                Access your healthcare insights on any device with our responsive platform.
+              </p>
+            </div>
+            
+            <div className="bg-white p-4 rounded-xl shadow-lg border border-blue-100">
+              <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center">
+                <span className="mr-2">🔒</span>
+                HIPAA Compliant
+              </h4>
+              <p className="text-blue-700 text-sm">
+                Enterprise-grade security ensuring your patient data is always protected.
+              </p>
+            </div>
+            
+            <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl text-white">
+              <h4 className="text-lg font-semibold mb-2 flex items-center">
+                <span className="mr-2">⚡</span>
+                Real-time Updates
+              </h4>
+              <p className="text-blue-100 text-sm">
+                Get instant notifications and live data synchronization across all devices.
+              </p>
+            </div>
+            
+            <div className="bg-white p-4 rounded-xl shadow-lg border border-blue-100">
+              <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center">
+                <span className="mr-2">🌐</span>
+                Cloud Integration
+              </h4>
+              <p className="text-blue-700 text-sm">
+                Seamlessly integrate with existing healthcare systems and cloud infrastructure.
+              </p>
+            </div>
+            
+            <div className="bg-white p-4 rounded-xl shadow-lg border border-blue-100">
+              <h4 className="text-lg font-semibold text-blue-900 mb-2 flex items-center">
+                <span className="mr-2">📊</span>
+                Advanced Analytics
+              </h4>
+              <p className="text-blue-700 text-sm">
+                Powerful data analysis tools for comprehensive healthcare insights and reporting.
+              </p>
+            </div>
+            
+
+          </div>
+        </div>
+        
+        {/* Content - Right Side */}
+        <div className="order-1 lg:order-2">
+          <div className="space-y-6 h-full">
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">🏆</span>
+                </div>
+                <h3 className="text-2xl font-bold text-blue-900">Real Results, Real Impact</h3>
+              </div>
+              <p className="text-blue-700 leading-relaxed mb-6">
+                Our platform has demonstrated measurable improvements across multiple healthcare metrics, 
+                proving that AI-driven healthcare can deliver exceptional results for both patients and providers.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-4 bg-blue-50 rounded-xl">
+                  <div className="text-2xl font-bold text-blue-900 mb-1">250%</div>
+                  <div className="text-sm text-blue-600 font-medium">Faster Diagnosis</div>
+                </div>
+                <div className="text-center p-4 bg-blue-50 rounded-xl">
+                  <div className="text-2xl font-bold text-blue-900 mb-1">95%</div>
+                  <div className="text-sm text-blue-600 font-medium">Patient Satisfaction</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100">
+              <h4 className="text-lg font-semibold text-blue-900 mb-3 flex items-center">
+                <span className="mr-2">📊</span>
+                Key Performance Indicators
+              </h4>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-blue-700">Treatment Accuracy</span>
+                  <span className="font-semibold text-blue-900">98.5%</span>
+                </div>
+                <div className="w-full bg-blue-200 rounded-full h-2">
+                  <div className="bg-blue-600 h-2 rounded-full" style={{width: '98.5%'}}></div>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-blue-700">Response Time</span>
+                  <span className="font-semibold text-blue-900">2.3s</span>
+                </div>
+                <div className="w-full bg-blue-200 rounded-full h-2">
+                  <div className="bg-blue-600 h-2 rounded-full" style={{width: '85%'}}></div>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-blue-700">Cost Efficiency</span>
+                  <span className="font-semibold text-blue-900">40%</span>
+                </div>
+                <div className="w-full bg-blue-200 rounded-full h-2">
+                  <div className="bg-blue-600 h-2 rounded-full" style={{width: '40%'}}></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-8 rounded-2xl text-white">
+              <h4 className="text-xl font-semibold mb-4 flex items-center">
+                <span className="mr-2">🚀</span>
+                Ready to Transform Your Practice?
+              </h4>
+              <p className="text-blue-100 mb-6 text-base">
+                Join thousands of healthcare providers who are already experiencing the benefits 
+                of AI-powered healthcare insights.
+              </p>
+              <button
+                onClick={onSignIn}
+                className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-lg"
+              >
+                Start Your Free Trial
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       
+      {/* Additional Stats Row */}
       <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
           <div className="text-3xl font-bold text-blue-900 mb-2">250%</div>
           <div className="text-sm text-blue-600 font-medium">Faster Diagnosis</div>
         </div>
-        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
           <div className="text-3xl font-bold text-blue-900 mb-2">95%</div>
           <div className="text-sm text-blue-600 font-medium">Patient Satisfaction</div>
         </div>
-        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
           <div className="text-3xl font-bold text-blue-900 mb-2">40%</div>
           <div className="text-sm text-blue-600 font-medium">Cost Reduction</div>
         </div>
-        <div className="text-center bg-white p-6 rounded-xl shadow-lg">
+        <div className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
           <div className="text-3xl font-bold text-blue-900 mb-2">99.9%</div>
           <div className="text-sm text-blue-600 font-medium">Uptime Reliability</div>
         </div>
