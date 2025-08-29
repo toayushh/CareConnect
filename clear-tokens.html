@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Expired Tokens - LeapFrog Portal</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 0.5rem;
+        }
+        .button:hover {
+            background: #2563eb;
+        }
+        .button.danger {
+            background: #ef4444;
+        }
+        .button.danger:hover {
+            background: #dc2626;
+        }
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .token-info {
+            background: #f3f4f6;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+            font-family: monospace;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🔐</div>
+        <h1>Clear Expired Tokens</h1>
+        <p>This tool will help you clear expired JWT tokens from your browser and redirect you to the login page.</p>
+        
+        <div id="tokenInfo" class="token-info" style="display: none;">
+            <strong>Current Token Status:</strong><br>
+            <span id="tokenStatus"></span>
+        </div>
+        
+        <button class="button" onclick="checkTokenStatus()">Check Token Status</button>
+        <button class="button danger" onclick="clearTokens()">Clear All Tokens</button>
+        <button class="button" onclick="goToLogin()">Go to Login</button>
+        
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <script>
+        function checkTokenStatus() {
+            const token = localStorage.getItem('authToken');
+            const tokenInfo = document.getElementById('tokenInfo');
+            const tokenStatus = document.getElementById('tokenStatus');
+            
+            if (!token) {
+                tokenStatus.innerHTML = 'No token found in localStorage';
+                tokenInfo.style.display = 'block';
+                return;
+            }
+            
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const currentTime = Date.now() / 1000;
+                const isExpired = payload.exp < currentTime;
+                const expiryDate = new Date(payload.exp * 1000);
+                
+                tokenStatus.innerHTML = `
+                    <strong>Token Found:</strong><br>
+                    Expires: ${expiryDate.toLocaleString()}<br>
+                    Status: ${isExpired ? '❌ EXPIRED' : '✅ VALID'}<br>
+                    Time until expiry: ${isExpired ? 'EXPIRED' : Math.floor((payload.exp - currentTime) / 60) + ' minutes'}
+                `;
+                tokenInfo.style.display = 'block';
+                
+                showStatus(`Token is ${isExpired ? 'EXPIRED' : 'VALID'}`, isExpired ? 'error' : 'success');
+            } catch (error) {
+                tokenStatus.innerHTML = 'Invalid token format';
+                tokenInfo.style.display = 'block';
+                showStatus('Invalid token format', 'error');
+            }
+        }
+        
+        function clearTokens() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('user');
+            localStorage.removeItem('userType');
+            
+            showStatus('All tokens cleared successfully!', 'success');
+            document.getElementById('tokenInfo').style.display = 'none';
+            
+            // Redirect to main page after a short delay
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 2000);
+        }
+        
+        function goToLogin() {
+            window.location.href = '/#login';
+        }
+        
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Auto-check token status on page load
+        window.onload = function() {
+            checkTokenStatus();
+        };
+    </script>
+</body>
+</html>

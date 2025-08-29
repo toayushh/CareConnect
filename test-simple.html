@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LeapFrog Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container { 
+            background: rgba(255,255,255,0.1); 
+            padding: 30px; 
+            border-radius: 10px; 
+            text-align: center;
+        }
+        button { 
+            background: #4CAF50; 
+            color: white; 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px;
+            margin: 10px;
+        }
+        button:hover { background: #45a049; }
+        #result { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background: rgba(0,0,0,0.2); 
+            border-radius: 5px; 
+        }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐸 LeapFrog Healthcare Platform</h1>
+        <h2>Simple Test Interface</h2>
+        
+        <div>
+            <button onclick="testBackend()">Test Backend Connection</button>
+            <button onclick="testLogin()">Test Login</button>
+            <button onclick="openFullApp()">Open Full React App</button>
+        </div>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function testBackend() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Testing backend connection...';
+            
+            try {
+                const response = await fetch('http://localhost:9000/api/auth/login', {
+                    method: 'OPTIONS'
+                });
+                
+                if (response.ok) {
+                    result.innerHTML = '<div class="success">✅ Backend is responding on port 9000!</div>';
+                } else {
+                    result.innerHTML = '<div class="error">❌ Backend not responding</div>';
+                }
+            } catch (error) {
+                result.innerHTML = '<div class="error">❌ Backend connection failed: ' + error.message + '</div>';
+            }
+        }
+        
+        async function testLogin() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Testing login...';
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'test123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.access_token) {
+                    result.innerHTML = '<div class="success">✅ Login successful! Token received.</div>';
+                } else {
+                    result.innerHTML = '<div class="error">❌ Login failed: ' + (data.message || 'Unknown error') + '</div>';
+                }
+            } catch (error) {
+                result.innerHTML = '<div class="error">❌ Login test failed: ' + error.message + '</div>';
+            }
+        }
+        
+        function openFullApp() {
+            window.open('http://localhost:4000', '_blank');
+        }
+    </script>
+</body>
+</html>

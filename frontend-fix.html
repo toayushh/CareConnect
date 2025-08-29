@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Token Cleanup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .button.danger {
+            background-color: #dc3545;
+        }
+        .button.danger:hover {
+            background-color: #c82333;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Frontend Token Cleanup</h1>
+        <p>This tool will help fix the frontend authentication issues by clearing expired tokens and resetting the application state.</p>
+        
+        <div id="status" class="status info">
+            Ready to clean up expired tokens and reset frontend state.
+        </div>
+        
+        <div>
+            <button class="button" onclick="clearTokens()">🧹 Clear Expired Tokens</button>
+            <button class="button" onclick="clearAllStorage()">🗑️ Clear All Storage</button>
+            <button class="button" onclick="testBackend()">🔍 Test Backend Connection</button>
+            <button class="button" onclick="resetApp()">🔄 Reset Application</button>
+        </div>
+        
+        <div id="results" style="margin-top: 20px;"></div>
+        
+        <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 4px;">
+            <h3>📋 Instructions:</h3>
+            <ol>
+                <li>Click "Clear Expired Tokens" to remove old authentication data</li>
+                <li>Click "Test Backend Connection" to verify the Flask backend is working</li>
+                <li>Go back to your React app and try to log in again</li>
+                <li>If you don't have a user account, you'll need to register first</li>
+            </ol>
+            
+            <h3>🔗 Backend Status:</h3>
+            <p><strong>Flask Backend:</strong> Should be running on http://localhost:9000</p>
+            <p><strong>Database:</strong> PostgreSQL should be running on localhost:5432</p>
+        </div>
+    </div>
+
+    <script>
+        function showStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+
+        async function clearTokens() {
+            try {
+                // Clear authentication tokens
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('user');
+                
+                // Clear session storage
+                sessionStorage.clear();
+                
+                showStatus('✅ Expired tokens cleared successfully!', 'success');
+                addResult('✅ Authentication tokens removed from localStorage', 'success');
+                addResult('✅ Session storage cleared', 'success');
+                
+            } catch (error) {
+                showStatus('❌ Error clearing tokens: ' + error.message, 'error');
+                addResult('❌ Error: ' + error.message, 'error');
+            }
+        }
+
+        async function clearAllStorage() {
+            try {
+                // Clear all localStorage
+                localStorage.clear();
+                
+                // Clear all sessionStorage
+                sessionStorage.clear();
+                
+                showStatus('✅ All storage cleared successfully!', 'success');
+                addResult('✅ All localStorage cleared', 'success');
+                addResult('✅ All sessionStorage cleared', 'success');
+                
+            } catch (error) {
+                showStatus('❌ Error clearing storage: ' + error.message, 'error');
+                addResult('❌ Error: ' + error.message, 'error');
+            }
+        }
+
+        async function testBackend() {
+            try {
+                showStatus('🔍 Testing backend connection...', 'info');
+                
+                // Test health endpoint
+                const healthResponse = await fetch('http://localhost:9000/health');
+                if (healthResponse.ok) {
+                    const healthData = await healthResponse.json();
+                    addResult('✅ Backend health check: ' + healthData.status, 'success');
+                } else {
+                    addResult('❌ Backend health check failed: ' + healthResponse.status, 'error');
+                }
+                
+                // Test API endpoint
+                const apiResponse = await fetch('http://localhost:9000/api/users/me');
+                if (apiResponse.status === 401) {
+                    addResult('✅ API endpoint working (401 expected without auth)', 'success');
+                } else if (apiResponse.ok) {
+                    addResult('✅ API endpoint working', 'success');
+                } else {
+                    addResult('❌ API endpoint error: ' + apiResponse.status, 'error');
+                }
+                
+                showStatus('✅ Backend connection test completed!', 'success');
+                
+            } catch (error) {
+                showStatus('❌ Backend connection failed: ' + error.message, 'error');
+                addResult('❌ Connection error: ' + error.message, 'error');
+            }
+        }
+
+        function resetApp() {
+            try {
+                // Clear all storage
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Clear cookies
+                document.cookie.split(";").forEach(function(c) { 
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                });
+                
+                showStatus('✅ Application reset completed!', 'success');
+                addResult('✅ All storage cleared', 'success');
+                addResult('✅ All cookies cleared', 'success');
+                addResult('🔄 Please refresh your React app now', 'info');
+                
+            } catch (error) {
+                showStatus('❌ Error resetting app: ' + error.message, 'error');
+                addResult('❌ Error: ' + error.message, 'error');
+            }
+        }
+
+        // Auto-test backend on page load
+        window.addEventListener('load', () => {
+            setTimeout(testBackend, 1000);
+        });
+    </script>
+</body>
+</html>
