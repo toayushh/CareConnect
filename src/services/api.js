@@ -1,25 +1,51 @@
-// API service for Flask backend integration
-const API_BASE_URL = 'http://localhost:9000/api';
+/**
+ * API Service for Flask backend integration
+ * Handles all HTTP requests to the LeapFrog backend API
+ * @module ApiService
+ */
 
+// Use environment variable for production, fallback to localhost for development
+const API_BASE_URL = import.meta.env.VITE_API_URL 
+    ? `${import.meta.env.VITE_API_URL}/api`
+    : 'http://localhost:9000/api';
+
+console.log('API Base URL:', API_BASE_URL);
+
+/**
+ * API Service class for making authenticated requests to backend
+ * @class
+ */
 class ApiService {
+    /**
+     * Creates an instance of ApiService
+     * @constructor
+     */
     constructor() {
         this.baseURL = API_BASE_URL;
         this.token = localStorage.getItem('authToken');
     }
 
-    // Set auth token
+    /**
+     * Set authentication token
+     * @param {string} token - JWT access token
+     */
     setToken(token) {
         this.token = token;
         localStorage.setItem('authToken', token);
     }
 
-    // Clear auth token
+    /**
+     * Clear authentication token from storage
+     */
     clearToken() {
         this.token = null;
         localStorage.removeItem('authToken');
     }
 
-    // Get auth headers
+    /**
+     * Get headers with authentication token
+     * @returns {Object} Headers object with Content-Type and Authorization
+     */
     getAuthHeaders() {
         return {
             'Content-Type': 'application/json',
@@ -27,7 +53,13 @@ class ApiService {
         };
     }
 
-    // Generic request method
+    /**
+     * Generic request method for making API calls
+     * @param {string} endpoint - API endpoint path (e.g., '/users/me')
+     * @param {Object} options - Fetch options (method, body, headers, etc.)
+     * @returns {Promise<Object>} Response data as JSON
+     * @throws {Error} If request fails or returns non-2xx status
+     */
     async request(endpoint, options = {}) {
         const url = `${this.baseURL}${endpoint}`;
         const config = {
@@ -55,7 +87,20 @@ class ApiService {
         }
     }
 
-    // Authentication endpoints
+    // ==================== Authentication Methods ====================
+    
+    /**
+     * Login user and store access token
+     * @param {Object} credentials - Login credentials
+     * @param {string} credentials.email - User email
+     * @param {string} credentials.password - User password
+     * @returns {Promise<Object>} Response with access_token, refresh_token, and user data
+     * @example
+     * await apiService.login({
+     *   email: 'test@example.com',
+     *   password: 'password123'
+     * });
+     */
     async login(credentials) {
         const response = await this.request('/auth/login', {
             method: 'POST',
@@ -69,6 +114,21 @@ class ApiService {
         return response;
     }
 
+    /**
+     * Register a new user (patient or doctor)
+     * @param {Object} userData - User registration data
+     * @param {string} userData.name - Full name
+     * @param {string} userData.email - Email address
+     * @param {string} userData.password - Password
+     * @param {string} userType - User type ('patient' or 'doctor')
+     * @returns {Promise<Object>} Registration response
+     * @example
+     * await apiService.register({
+     *   name: 'John Doe',
+     *   email: 'john@example.com',
+     *   password: 'secure123'
+     * }, 'patient');
+     */
     async register(userData, userType) {
         const endpoint = userType === 'doctor' ? '/auth/register/doctor' : '/auth/register/patient';
         return this.request(endpoint, {
@@ -77,31 +137,37 @@ class ApiService {
         });
     }
 
+    /**
+     * Get current authenticated user's information
+     * @returns {Promise<Object>} User object with profile data
+     * @throws {Error} If user is not authenticated
+     */
     async getCurrentUser() {
         return this.request('/users/me');
     }
 
     // Patient endpoints
     async getPatientProfile() {
-        return this.request('/patients/me');
+        return this.request('/users/profile');
     }
 
     async updatePatientProfile(profileData) {
-        return this.request('/patients/me', {
+        return this.request('/users/profile', {
             method: 'PUT',
             body: JSON.stringify(profileData)
         });
     }
 
     async updateHealthFeatures(healthData) {
-        return this.request('/patients/health_features', {
+        // Health features are stored in user profile
+        return this.request('/users/profile', {
             method: 'PUT',
-            body: JSON.stringify(healthData)
+            body: JSON.stringify({ health_features: healthData })
         });
     }
 
     async getPatientRecommendations() {
-        return this.request('/patients/recommendations');
+        return this.request('/recommendations/recommendations');
     }
 
     // Doctor endpoints
@@ -151,33 +217,33 @@ class ApiService {
         });
     }
 
-    // Analytics endpoints
+    // Analytics endpoints (using health-analytics namespace)
     async getAnalytics() {
-        return this.request('/analytics/accuracy_vs_feedback');
+        return this.request('/health-analytics/metrics');
     }
 
     async getTrends() {
-        return this.request('/analytics/trends');
+        return this.request('/health-analytics/trends');
     }
 
     async getDoctorPerformance() {
-        return this.request('/analytics/doctor_performance');
+        return this.request('/health-analytics/doctor-performance');
     }
 
-    // Feedback endpoints
+    // Feedback endpoints (corrected to match backend)
     async submitDoctorFeedback(feedbackData) {
-        return this.request('/feedback/submit', {
+        return this.request('/feedback/doctor_feedback', {
             method: 'POST',
             body: JSON.stringify(feedbackData)
         });
     }
 
     async getFeedbackStats() {
-        return this.request('/feedback/stats');
+        return this.request('/feedback/feedback_stats');
     }
 
     async getPendingReviews() {
-        return this.request('/feedback/pending');
+        return this.request('/feedback/pending_reviews');
     }
 
     // Health data endpoints
@@ -210,7 +276,10 @@ class ApiService {
     // Health check
     async healthCheck() {
         try {
-            const response = await fetch('http://localhost:9000/health');
+            const healthUrl = import.meta.env.VITE_API_URL 
+                ? `${import.meta.env.VITE_API_URL}/health`
+                : 'http://localhost:9000/health';
+            const response = await fetch(healthUrl);
             return response.ok;
         } catch (error) {
             return false;
